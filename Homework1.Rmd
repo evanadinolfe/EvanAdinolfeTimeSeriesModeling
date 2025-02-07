@@ -1,0 +1,82 @@
+---
+title: "Homework 1"
+output: html_document
+date: "2025-02-04"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+Copy.of.Typical_Employee_Survey_Data <- read.csv("~/Downloads/Copy of Typical_Employee_Survey_Data.csv", header=FALSE)
+
+names(Copy.of.Typical_Employee_Survey_Data)[1] <- "Age"
+names(Copy.of.Typical_Employee_Survey_Data)[2] <- "Gender"
+names(Copy.of.Typical_Employee_Survey_Data)[3] <- "Satisfaction Level"
+names(Copy.of.Typical_Employee_Survey_Data)[4] <- "Job Characteristics"
+names(Copy.of.Typical_Employee_Survey_Data)[5] <- "Years Worked for Current Employer"
+names(Copy.of.Typical_Employee_Survey_Data)[6] <- "Promotion Probability"
+names(Copy.of.Typical_Employee_Survey_Data)[7] <- "Decisions"
+names(Copy.of.Typical_Employee_Survey_Data)[8] <- "Budgetary Decisions"
+names(Copy.of.Typical_Employee_Survey_Data)[9] <- "Proud"
+names(Copy.of.Typical_Employee_Survey_Data)[10] <- "More Pay in Organization"
+names(Copy.of.Typical_Employee_Survey_Data)[11] <- "Workplace Relations"
+
+fivenum(Copy.of.Typical_Employee_Survey_Data$Age)
+fivenum(Copy.of.Typical_Employee_Survey_Data$`Years Worked for Current Employer`)
+boxplot(Copy.of.Typical_Employee_Survey_Data$Age)
+#This visual shows that the average age of the people in the survey is 38 years-old. The oldest person is 67 years-old.
+boxplot(Copy.of.Typical_Employee_Survey_Data$`Years Worked for Current Employer`)
+#Most of the employees have worked for their employer for 2-12 years. The average is 5 years.
+
+Copy.of.Typical_Employee_Survey_Data$`Satisfaction Level` <- as.factor(Copy.of.Typical_Employee_Survey_Data$`Satisfaction Level`)
+Copy.of.Typical_Employee_Survey_Data$`Job Characteristics` <- as.factor(Copy.of.Typical_Employee_Survey_Data$`Job Characteristics`)
+Copy.of.Typical_Employee_Survey_Data$`Promotion Probability` <- as.factor(Copy.of.Typical_Employee_Survey_Data$`Promotion Probability`)
+Copy.of.Typical_Employee_Survey_Data$Decisions <- as.factor(Copy.of.Typical_Employee_Survey_Data$Decisions)
+Copy.of.Typical_Employee_Survey_Data$`Budgetary Decisions` <- as.factor(Copy.of.Typical_Employee_Survey_Data$`Budgetary Decisions`)
+Copy.of.Typical_Employee_Survey_Data$Proud <- as.factor(Copy.of.Typical_Employee_Survey_Data$Proud)
+Copy.of.Typical_Employee_Survey_Data$`More Pay in Organization` <- as.factor(Copy.of.Typical_Employee_Survey_Data$`More Pay in Organization`)
+Copy.of.Typical_Employee_Survey_Data$`Workplace Relations` <- as.factor(Copy.of.Typical_Employee_Survey_Data$`Workplace Relations`)
+
+Copy.of.Typical_Employee_Survey_Data$Gender <- factor(Copy.of.Typical_Employee_Survey_Data$Gender, levels = c(1,2), labels = c("Male", "Female"))
+pie(table(Copy.of.Typical_Employee_Survey_Data$Gender), main = 'Gender')
+#Most of the employees in this survey are male.
+Copy.of.Typical_Employee_Survey_Data$`Satisfaction Level` <- factor(Copy.of.Typical_Employee_Survey_Data$`Satisfaction Level`, levels = c(1,2,3,4), labels = c("Very Satisfied", "Moderately Satisfied", "A Little Dissatisfied", "Very Dissatisfied"))
+#Most employees in the survey are very satisfied with their job. Very little of the employees are dissatisfied. 
+barplot(table(Copy.of.Typical_Employee_Survey_Data$`Satisfaction Level`), main = 'Satisfaction Level')
+Copy.of.Typical_Employee_Survey_Data$`Job Characteristics` <- factor(Copy.of.Typical_Employee_Survey_Data$`Job Characteristics`, levels = c(1,2,3,4,5), labels = c("High Income", "No Danger of Being Fired", "Flexible Hours", "Opportunities for Advancement","Enjoying the Work"))
+barplot(table(Copy.of.Typical_Employee_Survey_Data$`Job Characteristics`), main = 'Job Characteristics')
+#By far, the majority of employees view enjoying their work as the most important job characteristic.
+Copy.of.Typical_Employee_Survey_Data$`Promotion Probability` <- factor(Copy.of.Typical_Employee_Survey_Data$`Promotion Probability`, levels = c(1,2,3,4,5), labels = c("Very Likely", "Likely", "Not Sure", "Unlikely","Very Unlikely"))
+pie(table(Copy.of.Typical_Employee_Survey_Data$`Promotion Probability`), main = 'Promotion Probability')
+#The majority of employees think they are very unlikely to be promoted in the next five years. Less than 50% of employees think they are likely or very likely to be promoted.
+Copy.of.Typical_Employee_Survey_Data$Decisions <- factor(Copy.of.Typical_Employee_Survey_Data$Decisions, levels = c(1,2,3,4), labels = c("Always", "Much of the Time", "Sometimes", "Never"))
+barplot(table(Copy.of.Typical_Employee_Survey_Data$Decisions), main = 'Make Decisions that Affect your Work?' )
+#Most of the time, employees are allowed to make decisions that affect their work at their jobs.
+Copy.of.Typical_Employee_Survey_Data$'Budgetary Decisions' <- factor(Copy.of.Typical_Employee_Survey_Data$'Budgetary Decisions', levels = c(1,2), labels = c("Yes", "No"))
+pie(table(Copy.of.Typical_Employee_Survey_Data$`Budgetary Decisions`), main = 'Participate in Budgetary Decisions?')
+#Most employees participate in budgetary decisions at their job.
+Copy.of.Typical_Employee_Survey_Data$Proud <- factor(Copy.of.Typical_Employee_Survey_Data$Proud, levels = c(1,2,3,4), labels = c("Very Proud", "Somewhat Proud", "Indifferent", "Not at all Proud"))
+barplot(table(Copy.of.Typical_Employee_Survey_Data$Proud), main = 'Are you Proud to be Working in your Organization?', horiz = TRUE)
+#Most employees are somewhat proud to be working in their organization. A very small amount of employees are not proud to be working for their organization.
+Copy.of.Typical_Employee_Survey_Data$`More Pay in Organization` <- factor(Copy.of.Typical_Employee_Survey_Data$`More Pay in Organization`, levels = c(1,2,3,4,5), labels = c("Very Likely", "Likely", "Not Sure", "Unlikely", "Very Unlikely"))
+barplot(table(Copy.of.Typical_Employee_Survey_Data$'More Pay in Organization'), main = 'More Pay in Organization', horiz = TRUE)
+#Most employees said it would be unlikely that they would turn down another job for more pay in order to stay in their current organization.
+Copy.of.Typical_Employee_Survey_Data$`Workplace Relations` <- factor(Copy.of.Typical_Employee_Survey_Data$`Workplace Relations`, levels = c(1,2,3,4,5), labels = c("Very Good", "Good", "So So", "Bad", "Very Bad"))
+barplot(table(Copy.of.Typical_Employee_Survey_Data$'Workplace Relations'), main = 'Relations in Workplace')
+#Almost all employees have good or very good relations in the workplace. Zero employees have very bad relations in the workplace.
+plot(Copy.of.Typical_Employee_Survey_Data$Age, Copy.of.Typical_Employee_Survey_Data$`Years Worked for Current Employer`, xlab = "Age", ylab = "Years Worked")
+#As age increases, the years worked in the organization generally increases. However, a lot of people still have only worked in the organization for 0-10 years, regardless of age.
+plot(Copy.of.Typical_Employee_Survey_Data$`Promotion Probability`, Copy.of.Typical_Employee_Survey_Data$Age, xlab = "Promotion Probability", ylab = "Age")
+#Those who said they are very likely to receive a promotion have the lowest average age.
+plot(Copy.of.Typical_Employee_Survey_Data$`Job Characteristics`, Copy.of.Typical_Employee_Survey_Data$Age, xlab = "Job Characteristics", ylab = "Age")
+#The average age for all of the answers was around the same, between 30 and 40 years-old.
+
+```
